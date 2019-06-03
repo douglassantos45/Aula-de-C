@@ -10,7 +10,8 @@ int main () {
     int* y = &x;        // (*)Signiifica um indereço da memória de determinada variável. Aqui estou                                 atribuido a (Y) a possição na momória de X
     *y = 30;            //Atribuindo a variável X o valor 30
 
-    printf("\nVAlor de X: %i\nValor de Y: %i", x, y);
+    printf("\nPosição de X: %i", &x);//
+    printf("\nValor de X modificado por Y: %i\nValor da posição de X em Y: %i", x, y);
 
 
     //FUNÇÃO MALLOC
