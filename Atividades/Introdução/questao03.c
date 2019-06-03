@@ -10,7 +10,6 @@ typedef struct {
 
 }Comunidade;
 
-
 float exibirResultado (float c, float e, float m, float aB, float o) {
 
 	float n_Total;
