@@ -11,7 +11,6 @@ int main (void) {
     printf("\nValor da Varável (%%x) = (%x)", Var); //Base Hexadecimal
     printf("\nValor da Varável (%%o) = (%o)", Var); //Base octal
 
-
     //Formatação de Floots
     printf("\n\n");
     printf("\nValor da Varável (%%f) = (%f)", Var2);
