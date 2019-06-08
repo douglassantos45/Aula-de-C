@@ -19,6 +19,7 @@ int main () {
 int CalcularDuracao(int x, int y) {
 
     int duracao = x - y;
-    (y < x) ? (duracao = (24 - x) + y) : (duracao = y - x);
+    (y < x) ? (duracao = (24 - x) + y) 
+    : (duracao = y - x);
     printf("\nO JOGO DUROU %i HORA(S)", duracao);
 }

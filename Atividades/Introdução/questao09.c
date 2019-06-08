@@ -1,10 +1,10 @@
 #include<stdio.h>
 
+int a = 0;
+
 int main (){
 
     /*Escreva um algoritmo para imprimir os 10 primeiros números inteiros maiores que 100.*/
-    
-    int a = 0;
 
     while (a < 10){
         /* code */

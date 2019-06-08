@@ -18,10 +18,8 @@ int main () {
 
 int OrdenaValores(int z, int d) {
     int aux = 0;
-    if(z < d) {
-        aux = z; z = d; d = aux;
-    } if(d < z) {
-        aux = d; d = z; z = aux;
+    if(z < d) { aux = z; z = d; d = aux;
+    } if(d < z) { aux = d; d = z; z = aux;
     } else {
         printf("\nValores Iguais!!");
         return main();

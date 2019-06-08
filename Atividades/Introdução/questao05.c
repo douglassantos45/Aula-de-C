@@ -18,8 +18,7 @@ int VerificarValores(int x, int y) {
     if(x == y){
         printf("\nValores iguais\n");
         return main();
-    }
-    (x > y) ? printf("\nO valor %i é maior", x)
+    } (x > y) ? printf("\nO valor %i é maior", x)
     : printf("\nO valor %i é maior", y);
     
 }

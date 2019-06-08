@@ -13,7 +13,7 @@ int main () {
     printf("\nInforme o ano de nascimento\n>>> ");
     scanf("%i", &anoNascimento);
 
-    (anoAtual - anoNascimento >= 18) ? printf("\nApto a votar em %i", anoAtual) : printf("\nNão é apto a votar em %i", anoAtual);
+    (anoAtual - anoNascimento >= 18) ? printf("\nVocê tem %i anos!!\nEstá Apto a votar em %i.", anoAtual - anoNascimento, anoAtual) : (anoAtual - anoNascimento > 0) ? printf("\nVocê tem %i anos!!\nNão é apto a votar em %i.", anoAtual - anoNascimento, anoAtual) : printf("\nIdade(%i anos) Negativa!!\nValor Invalido.", anoAtual - anoNascimento);
 
     printf("\n\n");
 
