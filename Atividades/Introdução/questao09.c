@@ -9,7 +9,6 @@ int main (){
     while (a < 10){
         /* code */
         a += 1;
+        printf("\n%i", a + 100);
     }
-    printf("\n%i", a + 100);
-    
 }
