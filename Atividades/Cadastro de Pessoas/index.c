@@ -3,10 +3,22 @@
 #include<string.h>
 #include<ctype.h>
 #include<stdbool.h>
+#include <unistd.h>//Sleep
 
 #define SIZE 200
 #define EMAIL "admin"
 #define SENHA "admin"
+
+int opcao;
+char opc;
+int cont = 0;
+int validation = 0;
+
+void exibirCaracter2();
+void exibirCadastrar(); 
+void listaUsuarios();
+void exibirPesquisa();
+
 
 typedef struct {
 
@@ -23,10 +35,9 @@ typedef struct {
 
 }Administrador;
 
-int opcao;
-int opc;
 
 Pessoa pessoa;
+
 Administrador adm;
 
 
@@ -34,27 +45,41 @@ Administrador adm;
 //Administrador
 
 void administrador() {
-    exibirCaracter();
+    system("clear");
+    //exibirCaracter();
     printf("\n\tBem-Vindo, Douglas\n");
     exibirCaracter(); 
 
-    printf("\n[1] - Cadastrar\n[2] - Pesquisar\n[3] - Alterar\n[4] - Deletar\n[5] - Sair\n>>>");
-    scanf("%i", &opc);
+    printf("\n\n\n[1] - Cadastrar\n[2] - Pesquisar\n[3] - Alterar\n[4] - Deletar\n[5] - Sair\n>>> ");
+    scanf("%i", &opcao);
 
     system("clear");
 
-    switch (opc){
+    switch (opcao){
     case 1:
         cadastrar();
         break;
     case 2:
         pesquisarDados();
         break;
+    case 3:
+        alterarUsuario(pessoa.email, pessoa.cpf, pessoa.nome);
+        break;
     case 5:
         login();
         break;
     default:
-        printf("\n\nAguardando...\nDesculpe, ocorreu um erro\n\n");
+        printf("\n\nAguardando");
+
+        for(int i = 0; i < 3; i++) {
+            printf(".");
+        }
+
+        printf("\n");
+        sleep(5);
+        system("clear");
+        printf("\nDesculpe, ocorreu um erro!\n\n");
+        
         administrador();
         break;
     }
@@ -64,56 +89,139 @@ void administrador() {
 //Cadastro
 
 void cadastrar(){
+
    static int linha;
+   
+   exibirCadastrar();
 
    do {
        
-       exibirCaracter();
-            printf("\n\t\tCADASTRO\n");
-       exibirCaracter();
-       
        printf("\n"); 
+       printf("\n[1] - Continuar\n[*] - Sair\n>>> ");
+       scanf("%s", &opc);
+
+       if(opc != '1') {
+           system("clear");
+           administrador();
+       } 
+
        printf("\nDigite o nome: ");
        scanf("%s", &pessoa.nome[linha]);
        printf("\nDigite o e-mail: ");
        scanf("%s", &pessoa.email[linha]);
        printf("\nDigite o CPF: ");
        scanf("%i", &pessoa.cpf[linha]);
+
+       if(pessoa.cpf[linha] != 0) {
+            printf("\n\n[1] - para continuar\n[*] - para sair!\n>>> ");
+            scanf("%s", &opc);
+            system("clear");
+
+            cont++;
+
+            linha++;
+
+            if(opc != '1') {
+
+                administrador();
+                
+            } else {
+                
+                exibirCadastrar();
+
+                printf("\n\nUsuários Cadastrados\n\nTotal: %i\n", linha);
+                    
+                //printf("\n\nEmail: %s\nCPF: %i\n\n", pessoa.email, pessoa.cpf[linha-1]);
+                listarUsuarios(pessoa.email, pessoa.cpf, pessoa.nome);
+                
+                printf("\n"); 
+                //system("clear"); 
+            }
        
-       printf("\n\n[1] - para continuar\n[*] - para sair!\n>>> ");
-       scanf("%i", &opcao);
-       system("clear");
+       } else {
+           system("clear");
+           printf("\nCPF Inválido\nExemplo de CPF: 12345678\n\n");
+           cadastrar();
+           
+       }
+       
 
-       linha++;
-
-       //int cpf = pessoa.cpf;
-       printf("\nUsuários Cadastrados\n");
-       exibirCaracter(); 
-       printf("\n\nEmail: %s\nCPF: %i\n\n", pessoa.email, pessoa.cpf[linha-1]);
-
-       //system("clear"); 
-
-   } while(opcao == 1);
+   } while(opc == '1');
 
    
 }
 
-//Usuáriosclear
-/*
-void listarUsuarios(Pessoa* email, Pessoa* cpf) {
 
-    printf("\nUsuários Cadastrados");
+//Alterar
+
+void alterarUsuario(Pessoa* email, Pessoa* cpf, Pessoa* nome){
+
+    int value;
+
     exibirCaracter();
-    //printf("\n\nEmail: %s\nCPF: %i\n\n", email, cpf);
-    //Retornando 0 como success
-                    system("clear");
+    printf("\n\t\tALTERAR USUÁRIO\n");
+    exibirCaracter();
+    
+    listarUsuarios(pessoa.email, pessoa.cpf, pessoa.nome);
 
-                    administrador();
-                    pesquisarDados();
-    for(int i = 0; i < SIZE; i++){
-        printf("\nNome: %s\nEmail: %s\nCPF: %i", email[i], cpf[i]);
+    printf("\n[1] - Continuar\n[*] - Sair\n>>> ");
+    scanf("%s", &opc);
+    system("clear");
+
+    if(opc != '1') {
+        system("clear");
+        administrador();
     }
-}*/
+
+    do{
+        
+        printf("\n\nSelecionar usuário\n>>> ");
+        scanf("%i", &value);
+
+        for(int i = 0; i <= cont; i++){
+
+            if(pessoa.cpf[i] == value) {
+                printf("\nNome: %s ", pessoa.nome[i]);
+                printf("\nCPF: %i", pessoa.cpf[i]);
+                printf("\nE-mail: %s", pessoa.email[i]);
+                validation = 1;
+                break;
+            } else {
+                validation = 0;
+            }
+
+        }
+
+    if(validation == 0) {
+        printf("\nUsuário Inválido!");
+    }
+
+    printf("\n[1] - Continuar\n[*] - Sair\n>>> ");
+    scanf("%s", &opc);
+    system("clear");
+
+    } while(opc != '1');
+
+    administrador();
+
+}
+
+
+
+//Usuários
+
+void listarUsuarios(Pessoa* email, Pessoa* cpf, Pessoa* nome) {
+
+    if(cont > 0) {
+        for(int i = 0; i < cont; i++){
+            if(pessoa.cpf[i] != 0){
+                printf("\n\nNome: %s\nEmail: %s\nCPF: %i\n", pessoa.nome[i], pessoa.email[i], pessoa.cpf[i]);
+                exibirCaracter2();
+            }
+        }
+    }
+    
+}
 
 
 //Pesquisa
@@ -123,40 +231,62 @@ void pesquisarDados(){
     //Armazenando valores para pesquisa
     int cpfPesquisa;
     char emailPesquisa[50];
-    do{
 
-        int sair;
+
+    do{
+        if(cont > 0) {
+            listarUsuarios(pessoa.email, pessoa.cpf, pessoa.nome);
+        } else {
+            exibirPesquisa();
+            printf("\n\nNenhum usuário cadastrado até o momento...\n");
+               
+        }
+
         printf("\n\n[1] - para pesquisar\n[*] - para sair\n>>> ");
-        scanf("%i", &sair);
-        
-        if(sair == 1) {
+        scanf("%s", &opc);
+
+        system("clear");
+
+        exibirPesquisa();    
+
+        if(opc == '1') {
+            
             printf("\n\n[1] - para pesquisar por CPF\n[2] - para pesquisar por E-mail\n>>> ");
             scanf("%i", &opcao);
+
+            system("clear");
 
             switch (opcao){
         
             case 1:
-                printf("\n");
-                exibirCaracter();
-                    printf("\n\t\tPESQUISA\n");
-                exibirCaracter();
+
+                exibirPesquisa();  
 
                 printf("\n");
      
                 printf("\nDigite o CPF: ");
                 scanf("%i", &cpfPesquisa);
+                
                 for(int i = 0; i < SIZE; i++){
-                    if(pessoa.cpf[i] == cpfPesquisa){
+                    if(pessoa.cpf[i] == cpfPesquisa && cpfPesquisa != 0){
                         printf("\nNome: %s\nEmail: %s\nCPF: %i", pessoa.nome[i], pessoa.email[i], pessoa.cpf[i]);
+                        validation = 1;
+                        break;
+                       
+                    } else {
+                        validation = 0;
                     }
+                    break;
+                }
+
+                if(validation == 0) {
+                    printf("\nCPF %i não encontrado!\n", cpfPesquisa); 
                 }
                 break;
 
             case 2:
-                printf("\n");
-                exibirCaracter();
-                    printf("\n\t\tPESQUISA\n");
-                exibirCaracter();
+                
+                exibirPesquisa();  
 
                 printf("\n");
                 
@@ -166,8 +296,17 @@ void pesquisarDados(){
                     if(strcmp(pessoa.email[j], emailPesquisa) == 0){
                         //Retornando 0 como success
                         printf("\nNome: %s\nEmail: %s\nCPF: %i", pessoa.nome[j], pessoa.email[j], pessoa.cpf[j]);
+                        validation = 1;
+                        break;
+                    } else {
+                        validation = 0;
                     }
+                    break;
                 }
+
+                if(validation == 0) {
+                    printf("\nEmail %s não encontrado\n", emailPesquisa); 
+                } 
                 break;
 
             default:
@@ -176,7 +315,7 @@ void pesquisarDados(){
                 break;
             }
 
-            printf("\n\n[1] - para continuar pesquisando\n[*] - para sair\n>>> ");
+            printf("\n\n[1] - para continuar\n[*] - para sair\n>>> ");
             scanf("%i", &opcao);
 
             switch (opcao){
@@ -186,14 +325,17 @@ void pesquisarDados(){
                 break;
             
             default:
-                printf("\n\nSaindo...\n\n");
-                cadastrar();
+                system("clear");
+                pesquisarDados();
                 break;
             }
         } else {
-            login();
+            system("clear");
+            administrador();
+            
         }
 
+        
     }while(opcao == 1);
 }
 
@@ -213,10 +355,10 @@ int login(){
             printf("\n\t\tLOGIN\n");
         exibirCaracter();
 
-        printf("\nE-mail: ");
+        printf("\n\n\tE-mail: ");
         scanf("%s", &adm.email);
 
-        printf("\nSenha: ");
+        printf("\n\n\tSenha: ");
         scanf("%s", &adm.senha);
 
         for(int j = 0; j< SIZE; j++) {
@@ -241,11 +383,16 @@ int login(){
 
                 printf("\nEsqueceu sua senha ou email?\n[S] - sim\n[N] - não\n>>> ");
                 scanf("%s", &recover);
+                system("clear");
+
+                exibirCaracter();
+                    printf("\n\t\tLOGIN\n");
+                exibirCaracter();
                 
-                printf("\nE-mail: ");
+                printf("\n\n\tE-mail: ");
                 scanf("%s", &adm.email);
 
-                printf("\nSenha: ");
+                printf("\n\n\tSenha: ");
                 scanf("%s", &adm.senha);
 
                 if(strcmp(adm.email[j], EMAIL) == 0 && (strcmp(adm.senha[j], SENHA)) == 0){
@@ -265,16 +412,36 @@ int login(){
 //Princial
 
 int main(){
-
+    
     login();
 
 }
 
 
-//String
+//Strings de cabeçalho 
+
 void exibirCaracter(){
     for(int i = 0; i < 20; i++) {
         printf("-=");
     }
 
 }
+void exibirCaracter2(){
+    for(int i = 0; i < 20; i++) {
+        printf("--");
+    }
+
+}
+
+void exibirCadastrar(){
+    exibirCaracter();
+        printf("\n\t\tCADASTRO\n");
+    exibirCaracter();
+}
+
+void exibirPesquisa() {
+    exibirCaracter();
+        printf("\n\t\tPESQUISA\n");
+    exibirCaracter();
+}
+
