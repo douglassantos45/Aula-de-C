@@ -3,7 +3,7 @@
 #include<string.h>
 #include<ctype.h>
 #include<stdbool.h>
-#include <unistd.h>//Sleep
+#include<unistd.h>//Sleep
 
 #define SIZE 200
 #define EMAIL "admin"
@@ -18,6 +18,7 @@ void exibirCaracter2();
 void exibirCadastrar(); 
 void listaUsuarios();
 void exibirPesquisa();
+void exibirAlterar();
 
 
 typedef struct {
@@ -46,8 +47,8 @@ Administrador adm;
 
 void administrador() {
     system("clear");
-    //exibirCaracter();
-    printf("\n\tBem-Vindo, Douglas\n");
+    exibirCaracter();
+    printf("\n\t  Bem-Vindo, Douglas\n");
     exibirCaracter(); 
 
     printf("\n\n\n[1] - Cadastrar\n[2] - Pesquisar\n[3] - Alterar\n[4] - Deletar\n[5] - Sair\n>>> ");
@@ -66,7 +67,20 @@ void administrador() {
         alterarUsuario(pessoa.email, pessoa.cpf, pessoa.nome);
         break;
     case 5:
-        login();
+        printf("\nDeseja realmente sair?\n[1] - Sair\n[*] - Não\n>>> ");
+        scanf("%s", &opc);
+
+        switch (opc){
+        case '1':
+            login();
+            break;
+        
+        default:
+            system("clear");
+            administrador();
+            break;
+        }
+
         break;
     default:
         printf("\n\nAguardando");
@@ -76,10 +90,10 @@ void administrador() {
         }
 
         printf("\n");
-        sleep(5);
+        sleep(2);
         system("clear");
         printf("\nDesculpe, ocorreu um erro!\n\n");
-        
+        sleep(3);
         administrador();
         break;
     }
@@ -90,7 +104,7 @@ void administrador() {
 
 void cadastrar(){
 
-   static int linha;
+   static int linha = 0;
    
    exibirCadastrar();
 
@@ -113,12 +127,21 @@ void cadastrar(){
        scanf("%i", &pessoa.cpf[linha]);
 
        if(pessoa.cpf[linha] != 0) {
-            for(int i = 0; i <= SIZE; i++) {
-                if(pessoa.cpf[i] == pessoa.cpf[linha]) {
+            for(int i = 0; i < SIZE; ++i) {
+                //Verificando igualdade de Cadastro
+                if(pessoa.cpf[linha] == pessoa.cpf[i]) {
+                    //system("clear");
+                    //printf("\nCPF já está cadastrado!\nTente novamente...\n");
+                    
+                    /*pessoa.nome[linha] = " ";
+                    pessoa.email[linha] = " ";
+                    pessoa.cpf[linha] = 0;*/
+
+                    //cadastrar();
                     validation = 0;
+
                 } else {
                     validation = 1;
-                    break;
                 }
             }
             
@@ -145,10 +168,7 @@ void cadastrar(){
                     listarUsuarios(pessoa.email, pessoa.cpf, pessoa.nome);
                     
                     printf("\n"); 
-                    //system("clear");
-
                 }
-
             }
        
        } else {
@@ -157,11 +177,9 @@ void cadastrar(){
            cadastrar();
            
        }
-       
 
    } while(opc == '1');
 
-   
 }
 
 
@@ -171,9 +189,7 @@ void alterarUsuario(Pessoa* email, Pessoa* cpf, Pessoa* nome){
 
     int value;
 
-    exibirCaracter();
-    printf("\n\t\tALTERAR USUÁRIO\n");
-    exibirCaracter();
+    exibirAlterar();
     
     listarUsuarios(pessoa.email, pessoa.cpf, pessoa.nome);
 
@@ -188,6 +204,8 @@ void alterarUsuario(Pessoa* email, Pessoa* cpf, Pessoa* nome){
 
     do{
         
+        exibirAlterar();
+
         printf("\n\nSelecionar usuário\n>>> ");
         scanf("%i", &value);
 
@@ -229,7 +247,7 @@ void alterarUsuario(Pessoa* email, Pessoa* cpf, Pessoa* nome){
 
 
 
-//Usuários
+//Mostrar Usuários
 
 void listarUsuarios(Pessoa* email, Pessoa* cpf, Pessoa* nome) {
 
@@ -270,18 +288,18 @@ void pesquisarDados(){
 
         system("clear");
 
-        exibirPesquisa();    
-
         if(opc == '1') {
             
+            exibirPesquisa();  
+
             printf("\n\n[1] - para pesquisar por CPF\n[2] - para pesquisar por E-mail\n>>> ");
             scanf("%i", &opcao);
-
-            system("clear");
 
             switch (opcao){
         
             case 1:
+
+                system("clear");
 
                 exibirPesquisa();  
 
@@ -290,8 +308,12 @@ void pesquisarDados(){
                 printf("\nDigite o CPF: ");
                 scanf("%i", &cpfPesquisa);
                 
+                printf("\nProcurando CPF %i...", cpfPesquisa);
+                printf("\n");
+                sleep(2);
                 for(int i = 0; i < SIZE; i++){
                     if(pessoa.cpf[i] == cpfPesquisa && cpfPesquisa != 0){
+                        
                         printf("\nNome: %s\nEmail: %s\nCPF: %i", pessoa.nome[i], pessoa.email[i], pessoa.cpf[i]);
                         validation = 1;
                         break;
@@ -308,13 +330,18 @@ void pesquisarDados(){
                 break;
 
             case 2:
-                
-                exibirPesquisa();  
+                system("clear");
 
+                exibirPesquisa();  
                 printf("\n");
                 
                 printf("\nDigite o E-mail: ");
                 scanf("%s", &emailPesquisa);
+
+                printf("\nProcurando E-mail %s...", emailPesquisa);
+                printf("\n");
+                sleep(2);
+
                 for(int j = 0; j< SIZE; j++) {
                     if(strcmp(pessoa.email[j], emailPesquisa) == 0){
                         //Retornando 0 como success
@@ -465,6 +492,12 @@ void exibirCadastrar(){
 void exibirPesquisa() {
     exibirCaracter();
         printf("\n\t\tPESQUISA\n");
+    exibirCaracter();
+}
+
+void exibirAlterar() {
+    exibirCaracter();
+    printf("\n\t    ALTERAR USUÁRIO\n");
     exibirCaracter();
 }
 
