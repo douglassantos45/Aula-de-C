@@ -13,12 +13,14 @@ int opcao;
 char opc;
 int cont = 0;
 int validation = 0;
+int ID = 0;
 
 void exibirCaracter2();
 void exibirCadastrar(); 
 void listaUsuarios();
 void exibirPesquisa();
 void exibirAlterar();
+void exibirDeletar();
 
 
 typedef struct {
@@ -66,6 +68,9 @@ void administrador() {
     case 3:
         alterarUsuario(pessoa.email, pessoa.cpf, pessoa.nome);
         break;
+    case 4:
+        deletarUsuarios();
+        break;
     case 5:
         printf("\nDeseja realmente sair?\n[1] - Sair\n[*] - Não\n>>> ");
         scanf("%s", &opc);
@@ -105,80 +110,100 @@ void administrador() {
 void cadastrar(){
 
    static int linha = 0;
+   int i = 0;
    
    exibirCadastrar();
 
    do {
        
-       printf("\n"); 
-       printf("\n[1] - Continuar\n[*] - Sair\n>>> ");
-       scanf("%s", &opc);
+    printf("\n"); 
+    printf("\n[1] - Continuar\n[*] - Sair\n>>> ");
+    scanf("%s", &opc);
 
-       if(opc != '1') {
-           system("clear");
-           administrador();
-       } 
+    if(opc != '1') {
+        system("clear");
+        administrador();
+    } 
 
-       printf("\nDigite o nome: ");
-       scanf("%s", &pessoa.nome[linha]);
-       printf("\nDigite o e-mail: ");
-       scanf("%s", &pessoa.email[linha]);
-       printf("\nDigite o CPF: ");
-       scanf("%i", &pessoa.cpf[linha]);
+    printf("\nDigite o nome: ");
+    scanf("%s", &pessoa.nome[linha]);
+    printf("\nDigite o e-mail: ");
+    scanf("%s", &pessoa.email[linha]);
+    printf("\nDigite o CPF: ");
+    scanf("%i", &pessoa.cpf[linha]);
+    
+    cont++;
 
-       if(pessoa.cpf[linha] != 0) {
-            for(int i = 0; i < SIZE; ++i) {
-                //Verificando igualdade de Cadastro
-                if(pessoa.cpf[linha] == pessoa.cpf[i]) {
-                    //system("clear");
-                    //printf("\nCPF já está cadastrado!\nTente novamente...\n");
-                    
-                    /*pessoa.nome[linha] = " ";
-                    pessoa.email[linha] = " ";
-                    pessoa.cpf[linha] = 0;*/
-
-                    //cadastrar();
-                    validation = 0;
-
-                } else {
-                    validation = 1;
-                }
+    printf("\nTotal ");
+    for (int i = 0; i < cont; i++) {
+        for (int j = i + 1; j < cont; j++) {
+            if (pessoa.cpf[i] == pessoa.cpf[j]) {
+                validation = 1;
+                break;
             }
-            
-            if(validation == 1) {
-                printf("\n\n[1] - para continuar\n[*] - para sair!\n>>> ");
-                scanf("%s", &opc);
-                system("clear");
+        }
+    }
 
-                cont++;
+    printf("\nValidação %i", validation);
+    validation = 0;
+    
+    linha++;
 
-                linha++;
+    printf("\n\n[1] - para continuar\n[*] - para sair!\n>>> ");
+    scanf("%s", &opc);
+    system("clear");
 
-                if(opc != '1') {
-
-                    administrador();
-                    
-                } else {
-                    
-                    exibirCadastrar();
-
-                    printf("\n\nUsuários Cadastrados\n\nTotal: %i\n", linha);
-                        
-                    //printf("\n\nEmail: %s\nCPF: %i\n\n", pessoa.email, pessoa.cpf[linha-1]);
-                    listarUsuarios(pessoa.email, pessoa.cpf, pessoa.nome);
-                    
-                    printf("\n"); 
-                }
-            }
-       
-       } else {
-           system("clear");
-           printf("\nCPF Inválido\nExemplo de CPF: 12345678\n\n");
-           cadastrar();
-           
-       }
+    
 
    } while(opc == '1');
+
+   /*if(pessoa.cpf[linha] != 0) {
+    for(int i = 0; i < cont; i--) {
+
+        //Verificando igualdade de Cadastro
+        if(pessoa.cpf[linha] == pessoa.cpf[i]) {
+            system("clear");
+            printf("\nCPF já está cadastrado!\nTente novamente...\n");
+            
+            pessoa.nome[linha][linha] = " ";
+            pessoa.email[linha][linha] = " ";
+            pessoa.cpf[linha] = 0;
+
+            //cadastrar();
+            validation = 0;
+            break;
+
+        } else {
+            validation = 1;
+        }
+    }
+    
+    if(validation == 1) {
+        
+
+        if(opc != '1') {
+
+            administrador();
+            
+        } else {
+            
+            exibirCadastrar();
+
+            printf("\n\nUsuários Cadastrados\n\nTotal: %i\n", linha);
+                
+            //printf("\n\nEmail: %s\nCPF: %i\n\n", pessoa.email, pessoa.cpf[linha-1]);
+            listarUsuarios(pessoa.email, pessoa.cpf, pessoa.nome);
+            
+            printf("\n"); 
+        }
+    }
+
+    } else {
+        system("clear");
+        printf("\nCPF Inválido\nExemplo de CPF: 12345678\n\n");
+        cadastrar();
+        
+    }*/
 
 }
 
@@ -222,10 +247,7 @@ void alterarUsuario(Pessoa* email, Pessoa* cpf, Pessoa* nome){
                 scanf("%i", &pessoa.cpf[i]);
                 printf("\nE-mail: ");
                 scanf("%s", &pessoa.email[i]);
-                validation = 1;
                 break;
-            } else {
-                validation = 0;
             }
 
         }
@@ -246,6 +268,36 @@ void alterarUsuario(Pessoa* email, Pessoa* cpf, Pessoa* nome){
 }
 
 
+//Deletar Usuários
+
+void deletarUsuarios() {
+    
+    int selectCpf;
+
+    exibirDeletar();
+
+    printf("\n[1] - Continuar\n[*] - Sair\n>>> ");
+    scanf("%s", &opc);
+
+    if(opc == '1') {
+
+        printf("\nSelecionar usuário pelo CPF\n>>> ");
+        scanf("%i", selectCpf);
+        
+        for(int i = 0; i < cont; i++) {
+            if(pessoa.cpf[i] == selectCpf){
+                pessoa.nome[i][i] = " ";
+                pessoa.email[i][i] = " ";
+                pessoa.cpf[i] = 0;
+            }
+            continue;
+        }
+    } else {
+        //system("clear");
+        //administrador();
+    }
+
+}
 
 //Mostrar Usuários
 
@@ -254,7 +306,7 @@ void listarUsuarios(Pessoa* email, Pessoa* cpf, Pessoa* nome) {
     if(cont > 0) {
         for(int i = 0; i < cont; i++){
             if(pessoa.cpf[i] != 0){
-                printf("\n\nNome: %s\nEmail: %s\nCPF: %i\n", pessoa.nome[i], pessoa.email[i], pessoa.cpf[i]);
+                printf("\n\nID: %i\nNome: %s\nEmail: %s\nCPF: %i\n", ID, pessoa.nome[i], pessoa.email[i], pessoa.cpf[i]);
                 exibirCaracter2();
             }
         }
@@ -498,6 +550,12 @@ void exibirPesquisa() {
 void exibirAlterar() {
     exibirCaracter();
     printf("\n\t    ALTERAR USUÁRIO\n");
+    exibirCaracter();
+}
+
+void exibirDeletar(){
+    exibirCaracter();
+    printf("\n\t    DELETAR USUÁRIO\n");
     exibirCaracter();
 }
 
