@@ -16,7 +16,7 @@ int validation = 0;
 
 void exibirCaracter2();
 void exibirCadastrar(); 
-struct Pessoa listaUsuarios(struct Pessoa x);
+void listaUsuarios();
 void exibirPesquisa();
 void exibirAlterar();
 
@@ -165,7 +165,7 @@ void cadastrar(){
                     printf("\n\nUsuários Cadastrados\n\nTotal: %i\n", linha);
                         
                     //printf("\n\nEmail: %s\nCPF: %i\n\n", pessoa.email, pessoa.cpf[linha-1]);
-                    listarUsuarios(pessoa);
+                    listarUsuarios(pessoa.email, pessoa.cpf, pessoa.nome);
                     
                     printf("\n"); 
                 }
@@ -191,8 +191,7 @@ void alterarUsuario(Pessoa* email, Pessoa* cpf, Pessoa* nome){
 
     exibirAlterar();
     
-    //listarUsuarios(pessoa.email, pessoa.cpf, pessoa.nome);
-    listarUsuarios(pessoa);
+    listarUsuarios(pessoa.email, pessoa.cpf, pessoa.nome);
 
     printf("\n[1] - Continuar\n[*] - Sair\n>>> ");
     scanf("%s", &opc);
@@ -250,18 +249,16 @@ void alterarUsuario(Pessoa* email, Pessoa* cpf, Pessoa* nome){
 
 //Mostrar Usuários
 
-struct Pessoa listaUsuarios(struct Pessoa x) {
+void listarUsuarios(Pessoa* email, Pessoa* cpf, Pessoa* nome) {
 
     if(cont > 0) {
         for(int i = 0; i < cont; i++){
-            if(x.cpf[i] != 0){
-                printf("\n\nNome: %s\nEmail: %s\nCPF: %i\n", x.nome[i], x.email[i], x.cpf[i]);
+            if(pessoa.cpf[i] != 0){
+                printf("\n\nNome: %s\nEmail: %s\nCPF: %i\n", pessoa.nome[i], pessoa.email[i], pessoa.cpf[i]);
                 exibirCaracter2();
             }
         }
     }
-
-    return x;
     
 }
 
@@ -279,7 +276,7 @@ void pesquisarDados(){
         if(cont > 0) {
             exibirPesquisa();
             printf("\n\nUsuários Cadastrados\n\nTotal: %i\n", cont);
-            listarUsuarios(pessoa);
+            listarUsuarios(pessoa.email, pessoa.cpf, pessoa.nome);
         } else {
             exibirPesquisa();
             printf("\n\nNenhum usuário cadastrado até o momento...\n");

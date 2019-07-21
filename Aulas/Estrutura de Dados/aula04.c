@@ -4,6 +4,7 @@
 
 #include<stdio.h>
 #include<malloc.h>
+#include<stdbool.h>
 
 #define MAX 50
 
