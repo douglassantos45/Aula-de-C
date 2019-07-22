@@ -1,0 +1,1 @@
+/*Faça um algoritmo que leia uma matriz notas[3][4], do tipo foloat, e informe qual a média geral da turma*/

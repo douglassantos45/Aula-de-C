@@ -135,18 +135,19 @@ void cadastrar(){
     
     cont++;
 
-    printf("\nTotal ");
     for (int i = 0; i < cont; i++) {
         for (int j = i + 1; j < cont; j++) {
             if (pessoa.cpf[i] == pessoa.cpf[j]) {
-                validation = 1;
+                printf("\nUsuário com CPF %i, já está cadastrado!\n", pessoa.cpf[i]);
+                pessoa.cpf[i] = 0;
+                pessoa.nome[i][i] = "";
+                pessoa.email[i][i] = "";
+                cont--;
                 break;
             }
         }
     }
 
-    printf("\nValidação %i", validation);
-    validation = 0;
     
     linha++;
 

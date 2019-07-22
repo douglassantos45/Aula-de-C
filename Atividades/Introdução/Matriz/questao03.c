@@ -1,0 +1,1 @@
+/*Faça um algoritmo que leia uma matriz notas[3][3], onde na prmieira coluna deve ter a nota do trabalho, na segunda a nota da prova, que deve ser informadas pelo usuário e na terceira coluna a média, que deve ser calculada pelo programa*/
