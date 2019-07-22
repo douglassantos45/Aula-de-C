@@ -346,17 +346,15 @@ void pesquisarDados(){
                 printf("\n");
                 sleep(2);
 
+                validation = 0;
+                
                 for(int i = 0; i < SIZE; i++){
                     if(pessoa.cpf[i] == cpfPesquisa && cpfPesquisa != 0){
                         
                         printf("\nNome: %s\nEmail: %s\nCPF: %i", pessoa.nome[i], pessoa.email[i], pessoa.cpf[i]);
                         validation = 1;
-                        break;
                        
-                    } else {
-                        validation = 0;
-                    }
-
+                    } 
                 }
 
                 if(validation == 0) {
