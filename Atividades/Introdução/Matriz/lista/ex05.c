@@ -10,17 +10,18 @@ int main(int argc, char const *argv[]) {
     
     int value;
 
-    value = 3;
+    printf("\nInforme o tamanho dos vetores\n>>> ");
+    scanf("%i", &value);
 
     int soma[value], vetorA[value], vetorB[value];
 
-    for(int i = 0; i < 3; i++) {
+    for(int i = 0; i < value; i++) {
 
         printf("\nA\n>>> ");
         scanf("%i", &vetorA[i]);
     }
 
-    for(int i = 0; i < 3; i++) {
+    for(int i = 0; i < value; i++) {
         printf("\nB\n>>> ");
         scanf("%i", &vetorB[i]);
         soma[i] = vetorA[i] + vetorB[i];            
