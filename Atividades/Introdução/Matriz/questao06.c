@@ -49,6 +49,8 @@ int main () {
 
     printf("\n");
 
+    //Verificando Diagnoal Secundária
+
     for(int i = 0; i < SIZE; i++) {
         for(int j = 0; j < SIZE; j++) {
             if(i+j == 1) { // == dependente do tamanho da matriz, se for 4x4, coloca == 4
