@@ -1,0 +1,4 @@
+Matematica: 10.00
+Fisica: 7.00
+Quimica: 0.00
+Media final: 5.67

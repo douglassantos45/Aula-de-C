@@ -8,8 +8,8 @@ int main () {
     int v2[8], v1[8];
 
     for(int i = 0; i < 3; i++) {
-        v1[i] = i;
-        v2[i] = v1[i];
+        v1[i] = i; //Preenchendo o vetor v1 
+        v2[i] = v1[i]; //Copiando os valores
     }
 
     for(int i = 0; i < 3; i++) {
