@@ -6,7 +6,7 @@
 
 int main () {
 
-    // Mostre a matriz MAT e gere e mostre a transporta dessa matriz
+    // Mostre a matriz MAT e gere e mostre a transposta dessa matriz
 
     // 1 2 3 4 5 6 7 8 9 10 11 12
 

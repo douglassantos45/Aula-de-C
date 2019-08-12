@@ -49,7 +49,7 @@ int main () {
 
     printf("\n");
 
-    //Verificando Diagnoal Secundária
+    //Verificando Diagonal Secundária
 
     for(int i = 0; i < SIZE; i++) {
         for(int j = 0; j < SIZE; j++) {
