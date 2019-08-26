@@ -19,7 +19,7 @@ int main (int args, const char *argv[]){
 
     printf("\n%i:%i:%i", agora.hora, agora.minuto, agora.segundo);
 
-    //Outra forma de alterar valores pelo ponteiro
+    //Outra forma de alterar valores pelo ponteiro, substitui a forma com parêntese
     depois->hora = 30;
     depois->minuto = 45;
     depois->segundo = 12;
