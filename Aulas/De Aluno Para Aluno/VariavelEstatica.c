@@ -13,7 +13,7 @@ int main () {
 
 void VariavelStatic (void) {
 
-    //Variável norma é alacada na memória toda vez que a função for chamada, por isso ela sempre vale 4
+    //Variável norma é alocada na memória toda vez que a função for chamada, por isso ela sempre vale 4
     int variavelAutomatica = 2;
     variavelAutomatica *= 2;
 
