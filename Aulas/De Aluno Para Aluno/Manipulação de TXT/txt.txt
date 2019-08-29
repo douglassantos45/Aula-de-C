@@ -1,3 +1,1 @@
-Testando
-Testando novamente
-3
+Hello, World

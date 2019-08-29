@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-//Lendo conteúdo no aquivo
+//Lendo conteúdo do aquivo
 
 int main () {
 
@@ -18,7 +18,7 @@ int main () {
 
     char frase[100][50];
 
-    //fgets sempre retornará um String
+    //fgets sempre retornará uma String
     while(fgets(frase, 100, file) != NULL){
         printf("\n%s", frase);
     }
