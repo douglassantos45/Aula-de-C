@@ -3,7 +3,7 @@ MANIPULANDO ESTRUTURAS
 */
 
 #include<stdio.h>
-#include<malloc.h>
+#include<malloc.h> //malloc aloca um espaço de memória e retorna um ponteiro do tipo void para o início do espaço de memória alocado.
 
 typedef struct{
 	
@@ -15,7 +15,7 @@ typedef struct{
 
 int main (void) {
 
-	//Definindo Struct
+	//Definindo o tipo da estrutura 
 	Horario* agora = (Horario*) malloc(sizeof(agora));
 	agora->hora = 15;
 	agora->minutos = 30;

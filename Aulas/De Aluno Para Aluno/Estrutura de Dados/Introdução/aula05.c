@@ -3,7 +3,7 @@
 */
 
 #include<stdio.h>
-#include<malloc.h> //Alocação de Memória, serve para verificar a quantidade de byts
+#include<malloc.h> //Alocação de Memória, serve para verificar a quantidade de bytes
 int main () {
 
     int x = 25;

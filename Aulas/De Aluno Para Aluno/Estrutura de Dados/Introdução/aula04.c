@@ -13,8 +13,8 @@ typedef struct {
     int peso;
     int altura;
 
-}PesoAltura;            
-typedef int CHAVE;      
+}PesoAltura;  
+  
 
 void main (void) {
 

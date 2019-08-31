@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-#define ALTURA_MAXIMA 255 //Define um constante
+#define ALTURA_MAXIMA 255 //Define uma constante
 
 //Declarando Struct
 typedef struct {        //typedef significa (define o nome)
@@ -10,7 +10,10 @@ typedef struct {        //typedef significa (define o nome)
 
 }PesoAltura;            // Nome do Strutc
 
-typedef int CHAVE;      //Estou chamando o tipo inteiro(int) em CHAVE
+typedef int CHAVE;      //Estou chamando o tipo inteiro(int) de CHAVE
+
+/*ex
+CHAVE idade; Idade do tipo inteiro usando typedef*/ 
 
 void main (void) {
 
