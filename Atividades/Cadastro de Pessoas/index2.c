@@ -142,7 +142,7 @@ void cadastrar(){
                 pessoa.cpf[i] = 0;
                 pessoa.nome[i][i] = "";
                 pessoa.email[i][i] = "";
-                cont--;
+                cont-2;
                 break;
             }
         }
@@ -318,7 +318,7 @@ void pesquisarDados(){
         }
 
         printf("\n\n[1] - para pesquisar\n[*] - para sair\n>>> ");
-        scanf("%s", &opc);
+        scanf("%s", &opc)-;
 
         system("clear");
 
