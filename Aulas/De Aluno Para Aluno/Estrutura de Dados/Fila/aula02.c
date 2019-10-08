@@ -1,7 +1,6 @@
 #include<stdio.h>
 #include<malloc.h>
 #define MAX 10
-#define True 1
 
 typedef struct {
     int inicio;
@@ -18,13 +17,13 @@ void iniciar(FILA *f) {
 
 void inserir(FILA *f, int elemento) {
     f->valores[f->fim] = elemento;
-    f->fim             = (f->fim + 1) & MAX;
+    f->fim             = (f->fim + 1) % MAX;
     f->total++;
 }
 
 int remover(FILA *f, int elemento) {
     elemento  = f->valores[f->inicio];
-    f->inicio = (f->inicio + 1) & MAX;
+    f->inicio = (f->inicio + 1) % MAX;
     f->total--;
 }
 
@@ -52,7 +51,7 @@ int remove_isEmpty(FILA *f, int *underflow) {
 int main(int argc, char const *argv[]) {
     /* code */
 
-    FILA *f = (FILA *) malloc (sizeof(int));
+    FILA *f;
 
     for(int i = 0; i < MAX; i++) {
         inserir(f, i);
