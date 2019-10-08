@@ -67,22 +67,22 @@ int buscaSequencial(LISTA* lista, TIPOCHAVE cha) {
 //INSERÇÃO(ADICIONANDO) DE UM ELEMENTO
 
 _Bool inserirElemento (LISTA* lista, REGISTRO rg, int i) {
-
-    //Verificando se o i digitado pelo usuário é válido e se a lita está vazia
+    
+    //Verificando se o i digitado pelo usuário é válido e se a lista está vazia
     if(lista->num_Elementos == MAX || i < 0 || i > lista->num_Elementos) {
         return false;
     }
     for (int j = lista->num_Elementos; j > i; j--) {
 
-        //Copiar o elemento de J para a ultima possição e inseri o elemento atual na possição J - 1
-        lista->ARRAY[j] = lista->ARRAY[j -1];
+        //Copiar o elemento de J para a ultima posição e inseri o elemento atual na possição J - 1
+        lista->ARRAY[j] = lista->ARRAY[j-1];
     }
 
     lista->ARRAY[i] = rg; //Copiar o registro para o Arranjo
     lista->num_Elementos++; //Adiconando mais uma possição no elemento
     
     return true;
-    
+
 }
 
 
@@ -96,7 +96,6 @@ _Bool excluirElemento (TIPOCHAVE ch, LISTA* lista) {
     if(posicao == -1) return false;
     
     for (int j = posicao; j < lista->num_Elementos; j--){
-        /* code */
         lista->ARRAY[j] = lista->ARRAY[j + 1];
     }
     lista->num_Elementos--;
