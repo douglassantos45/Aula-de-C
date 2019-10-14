@@ -51,14 +51,20 @@ int remove_isEmpty(FILA *f, int *underflow) {
 int main(int argc, char const *argv[]) {
     /* code */
 
-    FILA *f;
+    FILA f;
+
+    iniciar(&f);
 
     for(int i = 0; i < MAX; i++) {
-        inserir(f, i);
+        if(isFull(&f) == MAX) {
+            printf("ERR: FULL QUEUE!!");
+        } else {
+            inserir(f, i * 10 + 1);
+        }
     }
 
     for(int i = 0; i < MAX; i++) {
-        printf("\nPosição: %d, Valores: %d\n", i, f->valores[i]);
+        printf("\nPosição: %d, Valores: %d\n", i, f.valores[i]);
     }   
 
     return 0;
