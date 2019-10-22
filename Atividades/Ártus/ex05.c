@@ -3,6 +3,7 @@
 #define MAX_SIZE 20
 #define True  1
 #define False 0
+
 /*Elabore um método para manter duas pilhas dentro de um único vetor linear de modo que nenhuma das pilhas incorra em estouro até que toda a momória seja usada, e uma pilha inteira nunca seja deslocada para outro local dentro do vetor. Escreva rotinas em C, push1, push2, pop1 e pop2, para manipular as duas pilhas. (Dica: as duas pilhas crescem na diração da outra)*/
 
 typedef struct {
