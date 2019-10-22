@@ -7,7 +7,6 @@ struct lista {
 
 };
 
-
 struct lista *procurarValor(struct lista *ponteiroLista, int valor) {
 
     //Faça enquanto o ponteiro seja diferente de nulo
