@@ -1,3 +1,5 @@
 .vscode
 ./vscode
 !*.c
+!*.h
+.gitinore
